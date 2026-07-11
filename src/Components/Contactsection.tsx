@@ -1,5 +1,6 @@
-import { useEffect, useState, type JSX, type FormEvent } from "react";
+import { useState, type JSX, type FormEvent } from "react";
 import { Phone, Mail } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 type LookingFor = "room-hire" | "something-else";
 
@@ -20,13 +21,8 @@ const INITIAL_STATE: FormState = {
 };
 
 export default function ContactUs(): JSX.Element {
-  const [mounted, setMounted] = useState<boolean>(false);
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 50);
-    return () => clearTimeout(timer);
-  }, []);
+  const sectionRef = useScrollReveal();
 
   const handleChange = (
     field: keyof FormState,
@@ -38,18 +34,15 @@ export default function ContactUs(): JSX.Element {
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     console.log("Form submitted:", form);
-    // TODO: wire up to your backend / email service
   };
 
   return (
-    <section className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+    <section ref={sectionRef} className="reveal-parent mx-auto max-w-[1920px] px-6 md:px-12 lg:px-20 xl:px-32 py-16 md:py-20">
       <div
-        className={`grid grid-cols-1 gap-8 rounded-3xl bg-[#F3F4FB] p-6 transition-all duration-700 ease-out sm:p-8 md:grid-cols-2 md:p-10 ${
-          mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-        }`}
+        className="grid grid-cols-1 gap-8 rounded-3xl bg-[#F3F4FB] p-6 sm:p-8 md:grid-cols-2 md:p-10"
       >
         {/* Left: contact + form */}
-        <div className="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+        <div className="reveal-slide-left rounded-2xl bg-white p-6 shadow-sm sm:p-8">
           <h2 className="font-serif text-2xl text-gray-900 sm:text-3xl">
             Get In <span className="text-[#F5A25D]">Touch !</span>
           </h2>
@@ -152,10 +145,7 @@ export default function ContactUs(): JSX.Element {
 
         {/* Right: map + address */}
         <div
-          className={`min-w-0 rounded-2xl bg-white p-6 shadow-sm transition-all duration-700 ease-out sm:p-8 ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-          }`}
-          style={{ transitionDelay: "150ms" }}
+          className="reveal-slide-right rounded-2xl bg-white p-6 shadow-sm sm:p-8 flex flex-col h-full"
         >
           <h3 className="text-sm font-semibold text-[#F5A25D]">Find us at:</h3>
           <p className="mt-2 text-sm font-medium text-gray-800">
@@ -165,13 +155,13 @@ export default function ContactUs(): JSX.Element {
             (Entrance is around the corner on Rutland Street)
           </p>
 
-          <div className="mt-4 w-full overflow-hidden rounded-xl">
+          <div className="mt-4 w-full flex-grow overflow-hidden rounded-xl min-h-[300px]">
             <iframe
               title="Hustle Studios location map"
               src="https://www.google.com/maps?q=Level+1,+457+Elizabeth+St,+Surry+Hills,+NSW+2010&output=embed"
               width="100%"
               height="100%"
-              className="block h-56 w-full border-0 sm:h-64"
+              className="block h-full w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

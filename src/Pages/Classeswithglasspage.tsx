@@ -1,8 +1,8 @@
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, type JSX } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
-// Replace with your hosted images
 const HERO_IMAGE_URL: string =
-  "https://res.cloudinary.com/dquki4xol/image/upload/v1783511255/673203244eaa609ee763e9f0131aaea753583462_jhqxpp.png";
+  "https://res.cloudinary.com/dquki4xol/image/upload/f_auto,q_auto/v1783511255/673203244eaa609ee763e9f0131aaea753583462_jhqxpp.png";
 
 type ClassItem = {
   label: string;
@@ -24,11 +24,11 @@ const CLASS_ITEMS: ClassItem[] = [
 ];
 
 export default function ClassesWithGlasses(): JSX.Element {
-  const [mounted, setMounted] = useState<boolean>(false);
+  const introRef = useScrollReveal<HTMLDivElement>();
+  const galleryRef = useScrollReveal<HTMLDivElement>();
 
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 50);
-    return () => clearTimeout(timer);
+    document.title = "Classes with Glasses | BYO Creative Workshops in Sydney";
   }, []);
 
   return (
@@ -41,13 +41,9 @@ export default function ClassesWithGlasses(): JSX.Element {
         </span>
       </div>
 
-      {/* Hero image with overlay badge */}
-      <div className="mx-auto mt-6 max-w-5xl px-6">
-        <div
-          className={`relative overflow-hidden rounded-3xl shadow-lg transition-all duration-700 ease-out ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-          }`}
-        >
+      {/* Hero and Intro block */}
+      <section ref={introRef} className="reveal-parent mx-auto mt-6 max-w-[1920px] px-6 md:px-12 lg:px-20 xl:px-32">
+        <div className="reveal-scale-down relative overflow-hidden rounded-3xl shadow-lg">
           <img
             src={HERO_IMAGE_URL}
             alt="Group enjoying a creative BYO drinks workshop"
@@ -57,96 +53,69 @@ export default function ClassesWithGlasses(): JSX.Element {
             Creative Workshops - BYO Drinks
           </span>
         </div>
-      </div>
 
-      {/* Intro copy */}
-      <div className="mx-auto max-w-3xl px-6 py-12 text-center md:py-14">
-        <h1
-          className={`font-serif text-2xl text-gray-900 transition-all duration-700 ease-out sm:text-3xl ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: "100ms" }}
-        >
-          Team building activities in Sydney
-        </h1>
-        <p
-          className={`mt-2 text-sm font-semibold text-[#F5A25D] transition-all duration-700 ease-out sm:text-base ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: "180ms" }}
-        >
-          Corporate and private group bookings
-        </p>
+        <div className="mx-auto max-w-3xl py-12 text-center md:py-14">
+          <h1 className="reveal-slide-left font-serif text-2xl text-gray-900 sm:text-3xl">
+            Team building activities in Sydney
+          </h1>
+          <p className="reveal-slide-up mt-2 text-sm font-semibold text-[#F5A25D] sm:text-base">
+            Corporate and private group bookings
+          </p>
 
-        <p
-          className={`mt-5 text-left leading-relaxed text-gray-600 transition-all duration-700 ease-out ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: "260ms" }}
-        >
-          Looking for team building activities in Sydney that your
-          workmates will actually enjoy? Organising a hens party and want
-          to learn something new? All our private Classes with Glasses
-          are perfect for groups who want to have fun and do a bit of
-          bonding at the same time. All our classes are BYO drinks and
-          you are welcome to BYO catering as well.
-        </p>
+          <p className="reveal-slide-up mt-5 text-left leading-relaxed text-gray-600">
+            Looking for team building activities in Sydney that your
+            workmates will actually enjoy? Organising a hens party and want
+            to learn something new? All our private Classes with Glasses
+            are perfect for groups who want to have fun and do a bit of
+            bonding at the same time. All our classes are BYO drinks and
+            you are welcome to BYO catering as well.
+          </p>
 
-        <p
-          className={`mt-4 text-left leading-relaxed text-gray-600 transition-all duration-700 ease-out ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: "340ms" }}
-        >
-          Classes with Glasses are held at Hustle Studios in Surry
-          Hills. A beautiful heritage listed terrace house situated only
-          3 mins walk from Central Station.
-        </p>
+          <p className="reveal-slide-up mt-4 text-left leading-relaxed text-gray-600">
+            Classes with Glasses are held at Hustle Studios in Surry
+            Hills. A beautiful heritage listed terrace house situated only
+            3 mins walk from Central Station.
+          </p>
 
-        <p
-          className={`mt-4 text-left leading-relaxed text-gray-600 transition-all duration-700 ease-out ${
-            mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-          style={{ transitionDelay: "400ms" }}
-        >
-          Email{" "}
-          <a
-            href="mailto:hello@hustlestudios.com.au"
-            className="font-semibold text-[#F5A25D] hover:underline"
-          >
-            hello@hustlestudios.com.au
-          </a>{" "}
-          to check availability and for a quote for your group.
-        </p>
-      </div>
+          <p className="reveal-slide-up mt-4 text-left leading-relaxed text-gray-600">
+            Email{" "}
+            <a
+              href="mailto:hello@hustlestudios.com.au"
+              className="font-semibold text-[#F5A25D] transition-colors hover:text-[#e88f43] hover:underline"
+            >
+              hello@hustlestudios.com.au
+            </a>{" "}
+            to check availability and for a quote for your group.
+          </p>
+        </div>
+      </section>
 
       {/* Class gallery */}
-      <div className="mx-auto max-w-5xl px-6 pb-16 md:pb-20">
+      <section ref={galleryRef} className="reveal-parent mx-auto max-w-[1920px] px-6 md:px-12 lg:px-20 xl:px-32 pb-16 md:pb-20">
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
-          {CLASS_ITEMS.map((item, i) => (
-            <div
-              key={item.label}
-              className={`flex flex-col transition-all duration-700 ease-out ${
-                mounted
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-              }`}
-              style={{ transitionDelay: `${450 + i * 60}ms` }}
-            >
-              <div className="group aspect-square overflow-hidden rounded-xl shadow-sm">
-                <img
-                  src={item.imageUrl}
-                  alt={item.label}
-                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                />
+          {CLASS_ITEMS.map((item) => {
+            const optimizedUrl = item.imageUrl.replace("/upload/", "/upload/f_auto,q_auto/");
+            return (
+              <div
+                key={item.label}
+                className="reveal-flip-in flex flex-col"
+              >
+                <div className="group hover-card-trigger aspect-square overflow-hidden rounded-xl shadow-sm">
+                  <img
+                    src={optimizedUrl}
+                    alt={item.label}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="mt-2 text-center text-xs font-medium text-[#F5A25D] sm:text-sm">
+                  {item.label}
+                </p>
               </div>
-              <p className="mt-2 text-center text-xs font-medium text-[#F5A25D] sm:text-sm">
-                {item.label}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

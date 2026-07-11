@@ -1,1 +1,127 @@
 @import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Prevent horizontal scrollbars globally */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4fb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f5a25d;
+  border-radius: 5px;
+  border: 2px solid #f3f4fb;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e88f43;
+}
+
+/* Firefox Scrollbar support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f5a25d #f3f4fb;
+}
+
+/* Global focus and pointer rules */
+a, button, [role="button"], select, input[type="radio"], input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* Base utility for cards and hover states */
+.hover-card-trigger {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-card-trigger:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Scroll Reveal Animations (Varied, Slow & Steady) */
+.reveal-parent [class*="reveal-"] {
+  transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, letter-spacing;
+}
+
+/* Base states (hidden/translated) */
+.reveal-parent .reveal-slide-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.reveal-parent .reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+.reveal-parent .reveal-slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+.reveal-parent .reveal-scale-up {
+  opacity: 0;
+  transform: scale(0.93);
+}
+.reveal-parent .reveal-scale-down {
+  opacity: 0;
+  transform: scale(1.07);
+}
+.reveal-parent .reveal-flip-in {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(-15deg) translateY(20px);
+}
+.reveal-parent .reveal-tracking {
+  opacity: 0;
+  letter-spacing: 0.15em;
+}
+
+/* Active states (triggered when reveal-parent gets .active) */
+.reveal-parent.active .reveal-slide-up,
+.reveal-parent.active .reveal-slide-left,
+.reveal-parent.active .reveal-slide-right {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.reveal-parent.active .reveal-scale-up,
+.reveal-parent.active .reveal-scale-down {
+  opacity: 1;
+  transform: scale(1);
+}
+.reveal-parent.active .reveal-flip-in {
+  opacity: 1;
+  transform: perspective(1000px) rotateX(0deg) translateY(0);
+}
+.reveal-parent.active .reveal-tracking {
+  opacity: 1;
+  letter-spacing: normal;
+}
+
+/* Staggered delay helpers for sequential children */
+.reveal-parent.active [class*="reveal-"]:nth-child(1) { transition-delay: 50ms; }
+.reveal-parent.active [class*="reveal-"]:nth-child(2) { transition-delay: 150ms; }
+.reveal-parent.active [class*="reveal-"]:nth-child(3) { transition-delay: 250ms; }
+.reveal-parent.active [class*="reveal-"]:nth-child(4) { transition-delay: 350ms; }
+.reveal-parent.active [class*="reveal-"]:nth-child(5) { transition-delay: 450ms; }
+.reveal-parent.active [class*="reveal-"]:nth-child(6) { transition-delay: 550ms; }
+.reveal-parent.active [class*="reveal-"]:nth-child(7) { transition-delay: 650ms; }
+.reveal-parent.active [class*="reveal-"]:nth-child(8) { transition-delay: 750ms; }

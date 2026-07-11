@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Henssection from "../Components/Henssection";
 import SpaceHireOptionsAndPricing from "../Components/Spaceandpricing";
 import SpaceHireDetails from "../Components/Spacehiredetails";
@@ -5,6 +6,10 @@ import SpaceHireDetails from "../Components/Spacehiredetails";
 
 
 const Hens = () => {
+  useEffect(() => {
+    document.title = "Hens Parties & Bridal Showers | Hustle Studios";
+  }, []);
+
   return (
     <>
       <Henssection/>
@@ -14,4 +19,4 @@ const Hens = () => {
   );
 };
 
-export default Hens;
+export default Hens;

@@ -1,32 +1,23 @@
-import { useEffect, useState, type JSX } from "react";
+import { type JSX } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
-// Replace each url with your hosted photo
 const FOOTER_IMAGES: string[] = [
-  "https://res.cloudinary.com/dquki4xol/image/upload/v1783492581/IG-1_poruze.jpg",
-  "https://res.cloudinary.com/dquki4xol/image/upload/v1783492581/IG-2_w13dlh.jpg",
-  "https://res.cloudinary.com/dquki4xol/image/upload/v1783492581/IG-3_vm5jqq.jpg",
-  "https://res.cloudinary.com/dquki4xol/image/upload/v1783492581/IG-4_nelqam.jpg",
+  "https://res.cloudinary.com/dquki4xol/image/upload/f_auto,q_auto/v1783492581/IG-1_poruze.jpg",
+  "https://res.cloudinary.com/dquki4xol/image/upload/f_auto,q_auto/v1783492581/IG-2_w13dlh.jpg",
+  "https://res.cloudinary.com/dquki4xol/image/upload/f_auto,q_auto/v1783492581/IG-3_vm5jqq.jpg",
+  "https://res.cloudinary.com/dquki4xol/image/upload/f_auto,q_auto/v1783492581/IG-4_nelqam.jpg",
 ];
 
 export default function Footer(): JSX.Element {
-  const [mounted, setMounted] = useState<boolean>(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 50);
-    return () => clearTimeout(timer);
-  }, []);
+  const sectionRef = useScrollReveal<HTMLDivElement>();
 
   return (
     <footer className="w-full bg-[#0F3457]">
-      <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">
+      <div ref={sectionRef} className="reveal-parent mx-auto max-w-[1920px] px-6 md:px-12 lg:px-20 xl:px-32 py-14 md:py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
           {/* Left: brand + description */}
-          <div
-            className={`transition-all duration-700 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-            }`}
-          >
+          <div className="reveal-slide-left">
             <h2 className="font-serif text-2xl font-bold text-white sm:text-3xl">
               Hustle Studios
             </h2>
@@ -60,12 +51,7 @@ export default function Footer(): JSX.Element {
           </div>
 
           {/* Right: address/email + image strip */}
-          <div
-            className={`transition-all duration-700 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-            }`}
-            style={{ transitionDelay: "150ms" }}
-          >
+          <div className="reveal-slide-right">
             <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-semibold text-white sm:text-base">
               <span>Level 1, 457 Elizabeth Street, Surry Hills</span>
               <span className="hidden text-white/30 sm:inline">|</span>
@@ -81,12 +67,13 @@ export default function Footer(): JSX.Element {
               {FOOTER_IMAGES.map((url, i) => (
                 <div
                   key={i}
-                  className="group aspect-square overflow-hidden rounded-lg"
+                  className="group hover-card-trigger aspect-square overflow-hidden rounded-lg"
                 >
                   <img
                     src={url}
                     alt={`Hustle Studios space ${i + 1}`}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    loading="lazy"
                   />
                 </div>
               ))}

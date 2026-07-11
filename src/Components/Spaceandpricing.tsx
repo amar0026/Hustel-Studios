@@ -1,4 +1,5 @@
 import { type JSX } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 type RoomOption = {
   name: string;
@@ -8,9 +9,6 @@ type RoomOption = {
   description: string[];
 };
 
-// Replace each field with your actual room details, images, and gallery links.
-// Only the first entry (First Floor) has real content from the screenshot —
-// the remaining 8 are placeholders ready for you to fill in.
 const ROOM_OPTIONS: RoomOption[] = [
   {
     name: "First Floor CLICK IMAGE FOR GALLERY",
@@ -150,18 +148,23 @@ const ROOM_OPTIONS: RoomOption[] = [
   },
 ];
 
-function RoomCard({ room }: { room: RoomOption }): JSX.Element {
+function RoomCard({ room, index }: { room: RoomOption; index: number }): JSX.Element {
+  // Alternate sliding from left and right for pricing cards
+  const animClass = index % 2 === 0 ? "reveal-slide-left" : "reveal-slide-right";
+  const optimizedUrl = room.imageUrl.replace("/upload/", "/upload/f_auto,q_auto/");
+
   return (
-    <div className="overflow-hidden rounded-2xl bg-[#0F3457] p-5 shadow-md sm:p-6">
+    <div className={`${animClass} hover-card-trigger overflow-hidden rounded-2xl bg-[#0F3457] p-5 shadow-md sm:p-6`}>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <a
           href={room.galleryUrl}
           className="group block overflow-hidden rounded-xl"
         >
           <img
-            src={room.imageUrl}
+            src={optimizedUrl}
             alt={room.name}
             className="h-56 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 sm:h-full"
+            loading="lazy"
           />
         </a>
 
@@ -189,13 +192,15 @@ function RoomCard({ room }: { room: RoomOption }): JSX.Element {
 }
 
 export default function SpaceHireOptionsAndPricing(): JSX.Element {
+  const sectionRef = useScrollReveal<HTMLDivElement>();
+
   return (
-    <div className="mx-auto max-w-4xl px-6 py-14 md:py-16">
-      <h1 className="text-center font-serif text-2xl text-gray-900 sm:text-3xl">
+    <div ref={sectionRef} className="reveal-parent mx-auto max-w-[1920px] px-6 md:px-12 lg:px-20 xl:px-32 py-14 md:py-16">
+      <h1 className="reveal-slide-up text-center font-serif text-2xl text-gray-900 sm:text-3xl">
         Space hire options and pricing
       </h1>
 
-      <p className="mt-4 text-sm leading-relaxed text-gray-600">
+      <p className="reveal-slide-up mt-4 text-sm leading-relaxed text-gray-600">
         Replace this intro paragraph with your actual copy — a short
         overview of how pricing works across the different rooms, any
         minimum hire periods, and what's included (e.g. tables, chairs,
@@ -204,8 +209,8 @@ export default function SpaceHireOptionsAndPricing(): JSX.Element {
       </p>
 
       <div className="mt-8 space-y-8">
-        {ROOM_OPTIONS.map((room) => (
-          <RoomCard key={room.name} room={room} />
+        {ROOM_OPTIONS.map((room, idx) => (
+          <RoomCard key={room.name} room={room} index={idx} />
         ))}
       </div>
     </div>

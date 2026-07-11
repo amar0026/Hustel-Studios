@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import Contactsection from "../Components/Contactsection";
 import Herosection from "../Components/Herosection";
 import Meetingroominfo from "../Components/Meetingroominfo";
 import VenueGallery from "../Components/Venuegallery";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Hustle Studios | Creative Workshop & Meeting Room Space Surry Hills";
+  }, []);
+
   return (
     <>
      <Herosection/>
@@ -14,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;

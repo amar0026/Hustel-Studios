@@ -1,16 +1,19 @@
 import { type JSX } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 export default function SpaceHireDetails(): JSX.Element {
+  const sectionRef = useScrollReveal<HTMLDivElement>();
+
   return (
-    <div className="mx-auto max-w-3xl px-6 py-14 md:py-16">
+    <div ref={sectionRef} className="reveal-parent mx-auto max-w-[1920px] px-6 md:px-12 lg:px-20 xl:px-32 py-14 md:py-16">
       {/* Title */}
-      <h1 className="text-center font-serif text-2xl text-gray-900 sm:text-3xl">
+      <h1 className="reveal-slide-up text-center font-serif text-2xl text-gray-900 sm:text-3xl">
         Space hire details
       </h1>
-      <p className="mt-1 text-center text-sm text-gray-500">Self service:</p>
+      <p className="reveal-slide-up mt-1 text-center text-sm text-gray-500">Self service:</p>
 
       {/* Self service section */}
-      <div className="mt-8">
+      <div className="reveal-slide-up mt-8">
         <h2 className="font-semibold text-[#F5A25D]">
           No staff on-site, contact-free self service.
         </h2>
@@ -57,14 +60,14 @@ export default function SpaceHireDetails(): JSX.Element {
       </div>
 
       {/* Full service label/divider */}
-      <div className="mt-10 flex justify-center">
+      <div className="reveal-slide-up mt-10 flex justify-center">
         <span className="rounded-full bg-[#F5A25D] px-8 py-2.5 text-sm font-semibold text-white shadow-sm">
           Full service
         </span>
       </div>
 
       {/* Full service section — always visible */}
-      <div className="mt-10">
+      <div className="reveal-slide-up mt-10">
         <h2 className="font-semibold text-[#F5A25D]">Additional $150 Fee</h2>
 
         <p className="mt-4 leading-relaxed text-gray-600">
@@ -100,7 +103,7 @@ export default function SpaceHireDetails(): JSX.Element {
       </div>
 
       {/* Payments */}
-      <div className="mt-10">
+      <div className="reveal-slide-up mt-10">
         <h2 className="font-semibold text-[#F5A25D]">Payments:</h2>
         <p className="mt-4 leading-relaxed text-gray-600">
           A 30% deposit is required to secure booking. The remaining
@@ -110,7 +113,7 @@ export default function SpaceHireDetails(): JSX.Element {
       </div>
 
       {/* Enquire button */}
-      <div className="mt-10 flex justify-center">
+      <div className="reveal-slide-up mt-10 flex justify-center">
         <a
           href="#"
           className="rounded-full bg-[#F5A25D] px-10 py-3 text-sm font-bold tracking-wide text-white shadow-sm transition-all duration-300 hover:bg-[#e88f43] hover:shadow-md active:scale-95"

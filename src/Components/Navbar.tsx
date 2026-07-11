@@ -184,7 +184,7 @@ export default function Navbar(): JSX.Element {
 
   return (
     <header className="w-full bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-[1920px] items-center justify-between px-6 md:px-12 lg:px-20 xl:px-32 py-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 shrink-0">
           <img
