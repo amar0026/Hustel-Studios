@@ -29,7 +29,7 @@ export default function Hero(): JSX.Element {
       <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
         {/* Left: copy */}
         <div className="reveal-slide-left flex flex-col justify-center">
-          <h1 className="font-serif text-5xl leading-tight text-gray-900 sm:text-5xl md:text-[3.4rem]">
+          <h1 className="font-serif text-4xl leading-tight text-gray-900 sm:text-5xl md:text-[3.4rem]">
             <span className="block">Beautiful</span>
             <span className="block">Spaces for</span>
             <span className="block">
@@ -49,18 +49,18 @@ export default function Hero(): JSX.Element {
             <img
               src={HERO_IMAGE_URL}
               alt="Bright living room event space"
-              className="h-105 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="h-56 sm:h-72 md:h-96 lg:h-105 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           </div>
         </div>
       </div>
 
-      {/* Features + CTA — wide bar overlapping the bottom of the image */}
+      {/* Features + CTA — responsive block on mobile, absolute overlay on desktop */}
       <div
-        className="reveal-slide-up absolute bottom-23 z-20 w-[92%] max-w-4xl -translate-x-1/2 md:left-[37%] md:w-[80%] md:-translate-x-1/2"
+        className="reveal-slide-up relative mt-10 z-20 w-full max-w-4xl mx-auto md:absolute md:bottom-[-2.5rem] md:left-1/2 md:-translate-x-1/2 md:w-[80%] md:mt-0"
       >
-        <div className="flex flex-wrap items-center justify-center gap-6 rounded-full border border-gray-100 bg-white px-8 py-4 shadow-xl sm:gap-8 sm:justify-between">
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-15">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 rounded-2xl md:rounded-full border border-gray-100 bg-white p-6 md:px-8 md:py-4 shadow-xl">
+          <div className="grid grid-cols-3 sm:grid-cols-5 items-center justify-center gap-4 sm:gap-6 md:flex md:flex-row md:gap-8 lg:gap-12">
             {FEATURES.map(({ icon: Icon, label }) => (
               <div
                 key={label}
@@ -77,7 +77,7 @@ export default function Hero(): JSX.Element {
             ))}
           </div>
 
-          <button className="whitespace-nowrap rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-800 transition-all duration-300 hover:border-[#F5A25D] hover:bg-[#F5A25D] hover:text-white hover:shadow-md active:scale-95">
+          <button className="w-full md:w-auto whitespace-nowrap rounded-full border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-800 transition-all duration-300 hover:border-[#F5A25D] hover:bg-[#F5A25D] hover:text-white hover:shadow-md active:scale-95">
             See More
           </button>
         </div>
